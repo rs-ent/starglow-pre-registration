@@ -15,7 +15,7 @@ export default function ThankYou() {
         left: 16,
         zIndex: 1000, // 다른 요소 위에 표시되도록 z-index 설정
       }}>
-        <img
+        <svg
           src="/Frame 143.svg"
           alt="Header SVG"
           style={{
@@ -28,11 +28,11 @@ export default function ThankYou() {
         />
       </div>
       <div className="starglow-logo">
-        <img src="/Frame 833 2.svg" alt="Starglow Logo" className="logo-image" />
+        <svg src="/Frame 833 2.svg" alt="Starglow Logo" className="logo-image" />
       </div>
       <div className="thankyou-message">
         <div className="frame-50811">
-          <img
+          <svg
               src="/Frame 50811.svg"
               alt="Header SVG"
               style={{
@@ -48,7 +48,7 @@ export default function ThankYou() {
       </div>
       <div className="social">
         <a href="https://t.me/starglow_redslippers_bot" target="_blank" rel="noopener noreferrer">
-          <img
+          <svg
             src="/telegram.svg"
             alt="Header SVG"
             style={{
@@ -60,7 +60,7 @@ export default function ThankYou() {
           />
         </a>
         <a href="https://x.com/StarglowP" target="_blank" rel="noopener noreferrer">
-          <img
+          <svg
             src="/x.svg"
             alt="Header SVG"
             style={{

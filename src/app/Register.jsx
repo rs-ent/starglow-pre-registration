@@ -64,7 +64,7 @@ export default function Register() {
         left: 16,
         zIndex: 1000, // 다른 요소 위에 표시되도록 z-index 설정
       }}>
-        <img
+        <svg
           src="/Frame 143.svg"
           alt="Header SVG"
           style={{
@@ -78,7 +78,7 @@ export default function Register() {
       </div>
       <h1 className="coming-soon">COMING SOON</h1>
       <div className="frame-50811 mt-8">
-        <img
+        <svg
             src="/Frame 50811.svg"
             alt="Header SVG"
             style={{
