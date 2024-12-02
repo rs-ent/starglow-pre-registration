@@ -40,9 +40,6 @@ export default function Register() {
       console.log("Document ID:", docId);
       setMessage("Registration successful!");
 
-      // Send a message to the user via Telegram
-      await sendMessageToUser(user?.id);
-
       setIsRegistered(true);
     } catch (error) {
         console.error("Registration error:", error);
