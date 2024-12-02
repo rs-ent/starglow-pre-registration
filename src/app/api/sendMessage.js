@@ -5,7 +5,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "chatId and message are required." });
     }
   
-    const botToken = "7404442592:AAElreWN76sLRe7LSoIDEZL-t0Xs7r6Nfgg"; // BotFather에서 제공된 토큰
+    const botToken = process.env.NEXT_PUBLIC_FIREBASE_apiKey; // BotFather에서 제공된 토큰
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
   
     try {
