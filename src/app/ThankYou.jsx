@@ -15,9 +15,9 @@ export default function ThankYou() {
         left: 16,
         zIndex: 1000, // 다른 요소 위에 표시되도록 z-index 설정
       }}>
-        <img
-          src="/Frame 143.svg"
-          alt="Header SVG"
+        <object
+          type="image/svg+xml"
+          data="/Frame 143.svg"
           style={{
             width: "100%",
             height: "auto",
@@ -25,51 +25,60 @@ export default function ThankYou() {
             top: 0,
             left: 0,
           }}
+          aria-label="Header SVG"
         />
       </div>
       <div className="starglow-logo">
-        <img src="/Frame 833 2.svg" alt="Starglow Logo" className="logo-image" />
+      <object
+          type="image/svg+xml"
+          data="/Frame 833 2.svg"
+          className="logo-image"
+          aria-label="Starglow Logo"
+        ></object>
       </div>
       <div className="thankyou-message">
         <div className="frame-50811">
-          <img
-              src="/Frame 50811.svg"
-              alt="Header SVG"
-              style={{
-                width: "50%",
-                height: "auto",
-                position: "relative",
-                alignItems: "center",
-              }}
-            />
+        <object
+          type="image/svg+xml"
+          data="/Frame 50811.svg"
+          style={{
+            width: "50%",
+            height: "auto",
+            position: "relative",
+            alignItems: "center",
+          }}
+          aria-label="Header SVG"
+        ></object>
         </div>
         <h1>THANK YOU!</h1>
         <p>AND STAY TUNED!<br/><br/>DON’T FORGET TO<br/>FOLLOW OUR CHANNEL</p>
       </div>
       <div className="social">
         <a href="https://t.me/starglow_redslippers_bot" target="_blank" rel="noopener noreferrer">
-          <img
-            src="/telegram.svg"
-            alt="Header SVG"
-            style={{
-              width: "100%",
-              height: "auto",
-              position: "relative",
-              alignItems: "center",
-            }}
-          />
+        <object
+          type="image/svg+xml"
+          data="/telegram.svg"
+          style={{
+            width: "100%",
+            height: "auto",
+            position: "relative",
+            alignItems: "center",
+          }}
+          aria-label="Telegram SVG"
+        ></object>
         </a>
         <a href="https://x.com/StarglowP" target="_blank" rel="noopener noreferrer">
-          <img
-            src="/x.svg"
-            alt="Header SVG"
-            style={{
-              width: "100%",
-              height: "auto",
-              position: "relative",
-              alignItems: "center",
-            }}
-          />
+        <object
+  type="image/svg+xml"
+  data="/x.svg"
+  style={{
+    width: "100%",
+    height: "auto",
+    position: "relative",
+    alignItems: "center",
+  }}
+  aria-label="X SVG"
+></object>
         </a>
       </div>
     </div>

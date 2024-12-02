@@ -64,9 +64,9 @@ export default function Register() {
         left: 16,
         zIndex: 1000, // 다른 요소 위에 표시되도록 z-index 설정
       }}>
-        <img
-          src="/Frame 143.svg"
-          alt="Header SVG"
+        <object
+          type="image/svg+xml"
+          data="/Frame 143.svg"
           style={{
             width: "80%",
             height: "auto",
@@ -74,19 +74,19 @@ export default function Register() {
             top: 0,
             left: 0,
           }}
-        />
+        ></object>
       </div>
       <h1 className="coming-soon">COMING SOON</h1>
       <div className="frame-50811 mt-8">
-        <img
-            src="/Frame 50811.svg"
-            alt="Header SVG"
-            style={{
-              width: "100%",
-              height: "auto",
-              position: "relative",
-            }}
-          />
+        <object
+      type="image/svg+xml"
+      data="/Frame 50811.svg"
+      style={{
+        width: "100%",
+        height: "auto",
+        position: "relative",
+      }}
+    ></object>
       </div>
       <p className="pre-register-and-get-exclusive-reward mt-8">
         PRE-REGISTER AND
