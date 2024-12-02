@@ -1,0 +1,71 @@
+/* 전체 컨테이너 */
+.thankyou-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #6466F1 0%, #8B5CF6 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "GmarketSansMedium", sans-serif;
+    color: #fff;
+  }
+  
+  /* 로고 섹션 */
+  .starglow-logo {
+    text-align: center;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: center;
+    width:40%;
+    min-width: 150px;
+    max-width: 250px;
+  }
+
+  .logo-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2px;
+  }
+  
+  .starglow-text {
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  
+  /* 메인 메시지 */
+  .thankyou-message {
+    text-align: center;
+  }
+  
+  .thankyou-message h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 30px;
+  }
+  
+  .thankyou-message p {
+    font-size: 1rem;
+    margin-top: 2px;
+  }
+  
+  .frame-50811 {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social {
+    display: grid;    
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 40px;
+    gap: 20px;
+    width: 27%;
+    min-width: 85px;
+    max-width: 120px;
+    justify-content: center;
+  }
