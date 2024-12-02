@@ -36,20 +36,19 @@ export default function ThankYou() {
           aria-label="Starglow Logo"
         ></object>
       </div>
-      <div className="thankyou-message">
-        <div className="frame-50811">
-        <object
-          type="image/svg+xml"
-          data="/Frame 50811.svg"
-          style={{
-            width: "50%",
-            height: "auto",
-            position: "relative",
-            alignItems: "center",
-          }}
-          aria-label="Header SVG"
-        ></object>
+      <div className="frame-50811 mt-8">
+          <object
+            type="image/svg+xml"
+            data="/Frame 50811.svg"
+            style={{
+              width: "100%",
+              height: "auto",
+              position: "relative",
+            }}
+          ></object>
         </div>
+      <div className="thankyou-message">
+        
         <h1>THANK YOU!</h1>
         <p>AND STAY TUNED!<br/><br/>DON’T FORGET TO<br/>FOLLOW OUR CHANNEL</p>
       </div>
