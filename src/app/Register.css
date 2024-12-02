@@ -32,6 +32,7 @@
     margin-bottom: 24px;
     align-items: center;
     justify-content: center;
+    max-width: 100px;
   }
   
   .star-8,
