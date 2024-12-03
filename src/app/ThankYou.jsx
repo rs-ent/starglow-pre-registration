@@ -54,30 +54,27 @@ export default function ThankYou() {
       </div>
       <div className="social">
         <a href="https://t.me/starglow_redslippers_bot" target="_blank" rel="noopener noreferrer">
-        <object
-          type="image/svg+xml"
-          data="/telegram.svg"
-          style={{
-            width: "100%",
-            height: "auto",
-            position: "relative",
-            alignItems: "center",
-          }}
-          aria-label="Telegram SVG"
-        ></object>
+          <img
+              src="/telegram.svg"
+              alt="TELEGRAM SVG"
+              style={{
+                width: "100%",
+                height: "auto",
+                position: "relative",
+                alignItems: "center",
+              }}
+          />
         </a>
-        <a href="https://x.com/StarglowP" target="_blank" rel="noopener noreferrer">
-        <object
-  type="image/svg+xml"
-  data="/x.svg"
-  style={{
-    width: "100%",
-    height: "auto",
-    position: "relative",
-    alignItems: "center",
-  }}
-  aria-label="X SVG"
-></object>
+        <a href="https://x.com/starglowP" target="_blank" rel="noopener noreferrer">
+          <img
+            src="/x.svg"
+            alt="X SVG"
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+            }}
+          />
         </a>
       </div>
     </div>

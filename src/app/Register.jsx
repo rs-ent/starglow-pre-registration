@@ -79,14 +79,14 @@ export default function Register() {
       <h1 className="coming-soon">COMING SOON</h1>
       <div className="frame-50811 mt-8">
         <object
-      type="image/svg+xml"
-      data="/Frame 50811.svg"
-      style={{
-        width: "100%",
-        height: "auto",
-        position: "relative",
-      }}
-    ></object>
+          type="image/svg+xml"
+          data="/Frame 50811.svg"
+          style={{
+            width: "100%",
+            height: "auto",
+            position: "relative",
+          }}
+        ></object>
       </div>
       <p className="pre-register-and-get-exclusive-reward mt-8">
         PRE-REGISTER AND
