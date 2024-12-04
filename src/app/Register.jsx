@@ -14,6 +14,8 @@ export default function Register() {
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
 
   useEffect(() => {
+    console.log('Telegram Web App:', window.Telegram?.WebApp);
+    console.log('Window:', window);
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
