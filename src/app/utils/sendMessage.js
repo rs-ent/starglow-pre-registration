@@ -40,7 +40,7 @@ export async function sendMessage(chatId, text, options = {}) {
   return responseBody;
 }
 
-const sendMessageToUser = async (chatId, message) => {
+export const sendMessageToUser = async (chatId, message) => {
     const response = await fetch("/api/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
