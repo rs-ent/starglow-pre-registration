@@ -1,7 +1,7 @@
 // src/app/api/telegram.js
 
-import { saveData } from "../firebase/fetch"; // Firebase Firestore 초기화
-import { sendMessage } from "../utils/sendMessage"; // 유틸리티 함수 임포트
+import { saveData } from "../../firebase/fetch"; // Firebase Firestore 초기화
+import { sendMessage } from "../../utils/sendMessage"; // 유틸리티 함수 임포트
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
