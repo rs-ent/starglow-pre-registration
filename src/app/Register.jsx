@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
+import { sendMessageToUser } from "./utils/sendMessage";
 import { saveData } from "./firebase/fetch";
-import { sendMessageToUser } from './api/sendMessage'; 
 import ThankYou from "./ThankYou";
 import './Register.css';
 
@@ -19,7 +19,7 @@ export default function Register() {
       const tg = window.Telegram.WebApp;
       tg.ready();
       const userInfo = tg.initDataUnsafe?.user || {};
-      setUser(userInfo); // 사용자 정보 저장
+      setUser(userInfo);
     }
   }, []);
 
@@ -29,31 +29,61 @@ export default function Register() {
       return;
     }
 
+    const emailRegex = /^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(email)) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+  
     try {
       setLoading(true);
       const registrationData = {
         email,
-        telegramUser: user, // Telegram 사용자 정보
+        telegramUser: user,
+        createdAt: new Date().toISOString(),
       };
   
-      const docId = await saveData("StarglowPreRegistration", registrationData);
+      const docId = await saveData("StarglowPreRegistration", registrationData, email);
       console.log("Document ID:", docId);
-      setMessage("Registration successful!");
+  
+      if (user?.id) {
+        try {
+          await sendMessageToUser(
+            user.id,
+            `🌟 Welcome to **Starglow Protocol**! 🌟
+            
+Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
 
+🚀 *LET THEM GLOW!* 🚀
+
+✨ Stay tuned for more updates from the Starglow Team!
+
+🔗 Follow us for the latest news and let the glow shine brighter!`
+          );
+          console.log("Message sent to user.");
+        } catch (error) {
+          console.error("Error sending message to user:", error);
+        }
+      } else {
+        console.warn("No Telegram user information available.");
+      }
+  
       setIsRegistered(true);
     } catch (error) {
-        console.error("Registration error:", error);
-        setMessage("An error occurred. Please try again.");
+      console.error("Registration error:", error);
+      setMessage("An error occurred. Please try again.");
     } finally {
-        setLoading(false); // End loading state
+      setLoading(false); // End loading state
     }
   };
 
+  
+
   return isRegistered ? (
     <div className="frame-2641">
-      <ThankYou />
+      <ThankYou user={user}/>
     </div>
-  ):(
+  ) : (
     <div className="frame-2641">
       <div style={{
         position: "fixed", // fixed로 변경하여 화면 상단에 고정
@@ -90,7 +120,7 @@ export default function Register() {
       </div>
       <p className="pre-register-and-get-exclusive-reward mt-8">
         PRE-REGISTER AND
-        <br/>GET EXCLUSIVE REWARD
+        <br />GET EXCLUSIVE REWARD
       </p>
       <div className="input-container">
         <input
@@ -110,5 +140,5 @@ export default function Register() {
         {loading ? "Submitting..." : "Register"}
       </button>
     </div>
-  )
+  );
 }

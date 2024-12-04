@@ -3,7 +3,24 @@
 import React from "react";
 import "./ThankYou.css";
 
-export default function ThankYou() {
+export default function ThankYou({user}) {
+
+  const BOT_USERNAME = "starglow_redslippers_bot";
+
+  const generateInviteLink = (referrerId) => {
+    return `https://t.me/${BOT_USERNAME}?start=${referrerId}`;
+  };
+
+  const handleCopyInviteLink = () => {
+    if (!user?.id) {
+      alert("User ID is not available.");
+      return;
+    }
+    const link = generateInviteLink(user.id);
+    navigator.clipboard.writeText(link);
+    alert("Your Telegram invite link has been copied to clipboard!");
+  };
+
   return (
     <div className="thankyou-container">
       <div style={{
@@ -77,6 +94,17 @@ export default function ThankYou() {
           />
         </a>
       </div>
+
+      {/* 초대 링크 공유 버튼 추가 */}
+      {user?.id && (
+        <button
+          onClick={handleCopyInviteLink}
+          className="invite-button"
+          style={{ marginTop: "20px" }}
+        >
+          Copy Telegram Invite Link
+        </button>
+      )}
     </div>
   );
 }
