@@ -14,11 +14,13 @@ export default function Register() {
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
 
   useEffect(() => {
-    // Telegram Web App 초기화
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
-      const userInfo = tg.initDataUnsafe?.user || {};
+      console.log('Init Data:', tg.initData);
+      console.log('Init Data Unsafe:', tg.initDataUnsafe);
+      const userInfo = tg.initDataUnsafe?.user;
+      console.log('User Info:', userInfo);
       setUser(userInfo);
     }
   }, []);
