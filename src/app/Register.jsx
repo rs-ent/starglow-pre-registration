@@ -20,7 +20,7 @@ const Register = () => {
   const [referrer, setReferrer] = useState(null);
   const [inviteCode, setInviteCode] = useState("");
   const [inviteLink, setInviteLink] = useState("");
-  const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
+  const [registeredData, setRegisteredData] = useState(null);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Register = () => {
         setUser(userData);
   
         const uniqueUser = await isUniqueUser(userData);
-        setIsRegistered(!uniqueUser);
+        setRegisteredData(uniqueUser);
   
       } catch (error) {
         console.error("Error initializing Telegram WebApp:", error);
@@ -113,7 +113,8 @@ Follow us for the latest news and let the glow shine brighter!
         console.warn("No Telegram user information available.");
       }
   
-      setIsRegistered(true);
+      setRegisteredData(registrationData);
+
     } catch (error) {
       console.error("Registration error:", error);
       setMessage("An error occurred. Please try again.");
@@ -122,9 +123,9 @@ Follow us for the latest news and let the glow shine brighter!
     }
   }  
 
-  return isRegistered ? (
+  return registeredData !== null ? (
     <div className="frame-2641">
-      <ThankYou user={user} inviteCode={inviteCode} referrer={referrer} inviteLink={inviteLink}/>
+      <ThankYou registrationData={registeredData}/>
     </div>
   ) : (isInitialLoading ? (<Loading />) : (
     <>

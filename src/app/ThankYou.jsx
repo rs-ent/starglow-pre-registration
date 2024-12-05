@@ -3,31 +3,31 @@
 import React, { useState } from "react";
 import "./ThankYou.css";
 
-const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
+const ThankYou = ({registrationData}) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // Telegram 공유 기능 트리거
   const handleShareInvite = () => {
-    if (!inviteLink) {
+    if (!registrationData.inviteLink) {
       alert("Invite link is not available.");
       return;
     }
-    const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(
+    const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(registrationData.inviteLink)}&text=${encodeURIComponent(
       "Join me on Starglow! 🚀 Click the link below to register:"
     )}`;
     window.open(shareUrl, "_blank");
   };
 
   const handleCopyInviteLink = () => {
-    if (!user?.id) {
+    if (!registrationData.user?.id) {
       alert("User Data is not provided");
       return;
     }
-    if (!inviteLink) {
+    if (!registrationData.inviteLink) {
       alert("Invite link is not available.");
       return;
     }
-    navigator.clipboard.writeText(inviteLink)
+    navigator.clipboard.writeText(registrationData.inviteLink)
       .then(() => {
         alert("Invite link copied to clipboard!");
       })
@@ -134,7 +134,7 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
         <div className="popup-overlay" onClick={closePopup}>
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
             <h3>Share Your Invite</h3>
-            <p>Choose how you want to share your invite link:</p>
+            <p>Choose how you want to share your invite link</p>
             <button className="popup-button" onClick={handleShareInvite}>Send Message</button>
             <button className="popup-button" onClick={handleCopyInviteLink}>Copy Invite Link</button>
           </div>

@@ -1,5 +1,5 @@
 import { db, storage } from './firebase';
-import { doc, collection, addDoc, setDoc, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
+import { doc, collection, addDoc, setDoc, serverTimestamp, query, where, getDoc, getDocs } from 'firebase/firestore';
 
 
 /**
@@ -186,10 +186,24 @@ export async function createUniqueInviteCode(email) {
 }
 
 export async function isUniqueUser(user) {
-    const collectionRef = collection(db, "StarglowPreRegistration"); // Firestore 컬렉션 참조
-    const q = query(collectionRef, where("telegramUser.id", "==", user.id));
-    const querySnapshot = await getDocs(q);
+  if (!user || !user.id) {
+      throw new Error('User 객체와 user.id가 필요합니다.');
+  }
 
-    if (querySnapshot.empty) return true;
-    return false
+  try {
+      const collectionRef = collection(db, "StarglowPreRegistration");
+      const q = query(collectionRef, where("telegramUser.id", "==", user.id));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+          return null; // 고유 사용자임을 나타냄
+      }
+
+      // 등록된 사용자의 첫 번째 문서 데이터를 반환
+      const userDoc = querySnapshot.docs[0];
+      return { id: userDoc.id, ...userDoc.data() };
+  } catch (error) {
+      console.error("Error checking if user is unique:", error);
+      throw error;
+  }
 }
