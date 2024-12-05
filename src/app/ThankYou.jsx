@@ -7,9 +7,9 @@ const ThankYou = ({user, inviteCode, referrer}) => {
 
   const BOT_USERNAME = "starglow_redslippers_bot";
 
-  const generateInviteLink = (inviteCode) => {
-    return `https://t.me/${BOT_USERNAME}?referrer=${inviteCode}`;
-  };
+  const generateInviteLink = () => {
+    return `https://t.me/${BOT_USERNAME}?startapp=${inviteCode}`;
+  };  
 
   const handleCopyInviteLink = () => {
     if (!user?.id) {

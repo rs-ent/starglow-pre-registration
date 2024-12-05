@@ -15,23 +15,25 @@ const Register = ({inviteCode}) => {
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
 
   useEffect(() => {
-    console.log('Telegram Web App:', window.Telegram?.WebApp);
-    console.log('Window:', window);
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const referrerParam = urlParams.get("start") || "none";
-    console.log('Referrer:', referrerParam);
-    setReferrer(referrerParam);
-    
+    const fetchReferrer = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const referrerValue = urlParams.get("startapp");
+      console.log('Referrer:', referrerValue);
+      setReferrer(referrerValue);
+    };
+  
+    fetchReferrer();
+  
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
       console.log('Telegram Web App:', tg);
-      console.log('Init Data:', tg.initData);
-      console.log('Init Data Unsafe:', tg.initDataUnsafe);
-      const userInfo = tg.initDataUnsafe?.user;
-      console.log('User Info:', userInfo);
-      setUser(userInfo);
+      setUser(tg.initDataUnsafe?.user);
+    } else {
+      console.log("Couldn't find Telegram.WebApp");
+      console.log("window : ", window);
+      console.log("window.Telegram : " , window.Telegram);
+      console.log("window.TelegramUser : ", window.telegramUser);
     }
   }, []);
 
