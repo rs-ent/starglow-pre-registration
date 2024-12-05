@@ -26,6 +26,10 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
     navigator.clipboard.writeText(inviteLink);
   };
 
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
   return (
     <div className="thankyou-container">
       <div style={{
@@ -100,10 +104,10 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
         </a>
       </div>
 
-      {/* 초대 링크 공유 버튼 추가 */}
+      {/* 초대 링크 공유 버튼 */}
       {user?.id && (
         <button
-          onClick={handleCopyInviteLink}
+          onClick={togglePopup}
           className="invite-button"
           style={{ marginTop: "20px" }}
         >
