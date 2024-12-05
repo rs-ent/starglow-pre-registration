@@ -94,15 +94,33 @@
     box-shadow: none; /* 비활성화 시 그림자 제거 */
   }
 
-  /* Popup Content */
-.popup-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 300px;
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  bottom: 0; /* 하단에 고정 */
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3); /* 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* 하단에서 나타나도록 설정 */
+  z-index: 1000;
+  animation: fadeIn 0.3s ease; /* 팝업이 점점 나타나는 애니메이션 */
 }
 
+/* Popup Content */
+.popup-content {
+  background: linear-gradient(90deg, #5255d1 0%, #754bcc 100%);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px 15px 0 0; /* 상단 모서리를 둥글게 */
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  animation: slideUp 0.3s ease; /* 슬라이드 업 애니메이션 */
+}
+
+/* 팝업 버튼 스타일 */
 .popup-button {
   background-color: #007bff;
   color: white;
@@ -131,4 +149,24 @@
 
 .popup-close-button:hover {
   background-color: #c82333;
+}
+
+/* 슬라이드 업 애니메이션 */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%); /* 화면 하단에서 시작 */
+  }
+  to {
+    transform: translateY(0); /* 제자리로 이동 */
+  }
+}
+
+/* 페이드 인 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
