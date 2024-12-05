@@ -12,14 +12,46 @@ const BOT_USERNAME = "starglow_redslippers_bot";
 const APP_NAME = "SGTPre";
 
 const Register = () => {
+  const [tg, setTG] = useState(null);
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(""); // Manage email input
   const [message, setMessage] = useState(""); // Feedback message
   const [loading, setLoading] = useState(false); // Loading state
   const [referrer, setReferrer] = useState(null);
+  const [inviteCode, setInviteCode] = useState("");
   const [inviteLink, setInviteLink] = useState("");
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
-  const [isLoading, setIsLoading] = useState(true);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+  useEffect(() => {
+    const initializeTelegram = async () => {
+      if (!tg) {
+        console.error("Telegram WebApp is not initialized.");
+        setIsLoading(false);
+        return;
+      }
+  
+      try {
+        tg.ready();
+  
+        const referrerValue = tg.initDataUnsafe?.start_param || null;
+        setReferrer(referrerValue);
+  
+        const userData = tg.initDataUnsafe?.user;
+        setUser(userData);
+  
+        const uniqueUser = await isUniqueUser(userData);
+        setIsRegistered(!uniqueUser);
+  
+      } catch (error) {
+        console.error("Error initializing Telegram WebApp:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  
+    initializeTelegram();
+  }, [tg]);
   
   const generateInviteLink = (inviteCode) => {
     return `https://t.me/${BOT_USERNAME}/${APP_NAME}?startapp=${inviteCode}`;
@@ -41,6 +73,7 @@ const Register = () => {
     try {
       setLoading(true);
       const inviteCode = await createUniqueInviteCode(email);
+      setInviteCode(inviteCode);
       const link = generateInviteLink(inviteCode);
       setInviteLink(link);
       const registrationData = {
@@ -93,7 +126,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
     <div className="frame-2641">
       <ThankYou user={user} inviteCode={inviteCode} referrer={referrer} inviteLink={inviteLink}/>
     </div>
-  ) : (isLoading ? (<Loading />) : (
+  ) : (isInitialLoading ? (<Loading />) : (
     <>
       {/* Telegram Web App SDK 로드 */}
       <Script
@@ -102,19 +135,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
         onLoad={ async () => {
           if (window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp;
-            tg.ready();
-
-            // startapp={referrerValue}
-            const referrerValue = tg.initDataUnsafe?.start_param || null;
-            setReferrer(referrerValue);
-
-            // User Data
-            setUser(tg.initDataUnsafe?.user);
-
-            const uniqueUser = await isUniqueUser(tg.initDataUnsafe?.user);
-            isRegistered(!uniqueUser);
-
-            setIsLoading(false);
+            setTG(tg);
           } else {
             console.error("Couldn't find Telegram.WebApp");
           }
@@ -160,11 +181,13 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
         </p>
         <div className="input-container">
           <input
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             className="input-field"
+            required
           />
         </div>
         {message && <p className="message">{message}</p>}

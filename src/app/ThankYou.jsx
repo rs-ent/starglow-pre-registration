@@ -23,7 +23,17 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
       alert("User Data is not provided");
       return;
     }
-    navigator.clipboard.writeText(inviteLink);
+    if (!inviteLink) {
+      alert("Invite link is not available.");
+      return;
+    }
+    navigator.clipboard.writeText(inviteLink)
+      .then(() => {
+        alert("Invite link copied to clipboard!");
+      })
+      .catch(() => {
+        alert("Failed to copy invite link.");
+      });
   };
 
   const openPopup = () => {
