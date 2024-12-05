@@ -7,7 +7,6 @@ import Script from 'next/script';
 import ThankYou from "./ThankYou";
 import Loading from "./Loading";
 import './Register.css';
-import { unique } from "next/dist/build/utils";
 
 const BOT_USERNAME = "starglow_redslippers_bot";
 const APP_NAME = "SGTPre";
