@@ -3,22 +3,27 @@
 import React from "react";
 import "./ThankYou.css";
 
-const ThankYou = ({user, inviteCode, referrer}) => {
+const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const BOT_USERNAME = "starglow_redslippers_bot";
-
-  const generateInviteLink = () => {
-    return `https://t.me/${BOT_USERNAME}?startapp=${inviteCode}`;
-  };  
+  // Telegram 공유 기능 트리거
+  const handleShareInvite = () => {
+    if (!inviteLink) {
+      alert("Invite link is not available.");
+      return;
+    }
+    const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(
+      "Join me on Starglow! 🚀 Click the link below to register:"
+    )}`;
+    window.open(shareUrl, "_blank");
+  };
 
   const handleCopyInviteLink = () => {
     if (!user?.id) {
-      alert("User ID is not available.");
+      alert("User Data is not provided");
       return;
     }
-    const link = generateInviteLink(inviteCode);
-    navigator.clipboard.writeText(link);
-    alert("Your Telegram invite link has been copied to clipboard!");
+    navigator.clipboard.writeText(inviteLink);
   };
 
   return (
@@ -102,8 +107,27 @@ const ThankYou = ({user, inviteCode, referrer}) => {
           className="invite-button"
           style={{ marginTop: "20px" }}
         >
-          Copy Telegram Invite Link
+          INVITE
         </button>
+      )}
+
+      {/* 팝업 */}
+      {isPopupOpen && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <h3>Invite Your Co-Pioneers!</h3>
+            <p>How would you like to share your invite link?</p>
+            <button onClick={handleShareInvite} className="popup-button">
+              Send Message
+            </button>
+            <button onClick={handleCopyInviteLink} className="popup-button">
+              Copy Invite Link
+            </button>
+            <button onClick={togglePopup} className="popup-close-button">
+              Close
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

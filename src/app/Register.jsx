@@ -7,13 +7,21 @@ import Script from 'next/script';
 import ThankYou from "./ThankYou";
 import './Register.css';
 
+const BOT_USERNAME = "starglow_redslippers_bot";
+const APP_NAME = "SGTPre";
+
 const Register = ({inviteCode}) => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(""); // Manage email input
   const [message, setMessage] = useState(""); // Feedback message
   const [loading, setLoading] = useState(false); // Loading state
   const [referrer, setReferrer] = useState(null);
+  const [inviteLink, setInviteLink] = useState("");
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
+
+  const generateInviteLink = () => {
+    return `https://t.me/${BOT_USERNAME}/${APP_NAME}?startapp=${inviteCode}`;
+  }; 
 
   // Registration handler
   const handleRegister = async () => {
@@ -30,11 +38,14 @@ const Register = ({inviteCode}) => {
   
     try {
       setLoading(true);
+      const link = generateInviteLink();
+      setInviteLink(link);
       const registrationData = {
         email,
         telegramUser: user,
         inviteCode: inviteCode,
         referrer: referrer,
+        inviteLink: link,
         createdAt: new Date().toISOString(),
       };
   
@@ -53,7 +64,10 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
 
 ✨ Stay tuned for more updates from the Starglow Team!
 
-🔗 Follow us for the latest news and let the glow shine brighter!`
+ Follow us for the latest news and let the glow shine brighter!
+
+🔗 INVITE LINK : ${inviteLink}
+`
           );
           console.log("Message sent to user.");
         } catch (error) {
@@ -74,7 +88,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
 
   return isRegistered ? (
     <div className="frame-2641">
-      <ThankYou user={user} inviteCode={inviteCode} referrer={referrer}/>
+      <ThankYou user={user} inviteCode={inviteCode} referrer={referrer} inviteLink={inviteLink}/>
     </div>
   ) : (
     <>
