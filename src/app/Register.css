@@ -108,3 +108,34 @@
     white-space: nowrap;
     border: 0;
   }
+
+  .loading-overlay {
+    position: fixed; /* 화면에 고정 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 전체 화면 가로 크기 */
+    height: 100%; /* 전체 화면 세로 크기 */
+    background-color: rgba(0, 0, 0, 1); /* 초기 배경 */
+    z-index: 9999; /* 다른 요소 위에 표시 */
+    display: flex; /* 중앙 정렬을 위한 Flexbox */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    pointer-events: all;
+    transition: opacity 0.5s ease;
+    animation: fadeToGradient 2s ease-in-out forwards;
+  }
+  
+
+
+  @keyframes fadeToGradient {
+    0% {
+      background-color: rgba(0, 0, 0, 1); /* 검은색 */
+      opacity: 1; /* 완전히 불투명 */
+    }
+    50%{
+      opacity: 1;
+    }
+    100% {
+      opacity: 0; /* 완전히 투명 */
+    }
+  }

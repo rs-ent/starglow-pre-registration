@@ -124,9 +124,11 @@ Follow us for the latest news and let the glow shine brighter!
 
   return (
     <>
-      {/* Loading 화면은 항상 표시 */}
-      <Loading isInitialLoading={isInitialLoading} />
-
+      {/* Loading 화면 */}
+      <div className="loading-overlay">
+        <Loading isInitialLoading={isInitialLoading} />
+      </div>
+  
       {/* 조건부 렌더링 */}
       {registeredData !== null ? (
         <div className="frame-2641">
@@ -134,82 +136,94 @@ Follow us for the latest news and let the glow shine brighter!
         </div>
       ) : (
         <>
-        {/* Telegram Web App SDK 로드 */}
-        <Script
-          src="https://telegram.org/js/telegram-web-app.js"
-          strategy="lazyOnload"
-          onLoad={ async () => {
-            if (window.Telegram?.WebApp) {
-              const tg = window.Telegram.WebApp;
-              setTG(tg);
-            } else {
-              console.error("Couldn't find Telegram.WebApp");
-              setMessage("Couldn't find Telegram.WebApp");
-              setIsInitialLoading(false);
-            }
-          }}
-        />
-        <div className="frame-2641">
-          <div style={{
-            position: "fixed", // fixed로 변경하여 화면 상단에 고정
-            width: "100%",
-            maxWidth: "350px",
-            height: "auto",
-            top: 16,
-            left: 16,
-            zIndex: 1000, // 다른 요소 위에 표시되도록 z-index 설정
-          }}>
-            <object
-              type="image/svg+xml"
-              data="/Frame 143.svg"
+          {/* Telegram Web App SDK 로드 */}
+          <Script
+            src="https://telegram.org/js/telegram-web-app.js"
+            strategy="lazyOnload"
+            onLoad={async () => {
+              if (window.Telegram?.WebApp) {
+                const tg = window.Telegram.WebApp;
+                setTG(tg);
+              } else {
+                console.error("Couldn't find Telegram.WebApp");
+                setMessage("Couldn't find Telegram.WebApp");
+                setIsInitialLoading(false);
+              }
+            }}
+          />
+          <div className="frame-2641">
+            <div
               style={{
-                width: "80%",
-                height: "auto",
-                position: "absolute",
-                top: 0,
-                left: 0,
-              }}
-            ></object>
-          </div>
-          <h1 className="coming-soon">COMING SOON</h1>
-          <div className="frame-50811 mt-8">
-            <object
-              type="image/svg+xml"
-              data="/Frame 50811.svg"
-              style={{
+                position: "fixed",
                 width: "100%",
+                maxWidth: "350px",
                 height: "auto",
-                position: "relative",
+                top: 16,
+                left: 16,
+                zIndex: 1000,
               }}
-            ></object>
-          </div>
-          <p className="pre-register-and-get-exclusive-reward mt-8">
-            PRE-REGISTER AND
-            <br />GET EXCLUSIVE REWARD
-          </p>
-          <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }}>
-            <div className="input-container">
-              <label htmlFor="email" className="sr-only">Email</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                className="input-field"
-                required
-              />
-              {message && <p className="message">{message}</p>}
-              <button
-                type="submit"
-                disabled={loading}
-                className="register-button"
-              >
-                {loading ? "Submitting..." : "Register"}
-              </button>
+            >
+              <object
+                type="image/svg+xml"
+                data="/Frame 143.svg"
+                style={{
+                  width: "80%",
+                  height: "auto",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                }}
+              ></object>
             </div>
-          </form>
-        </div>
+  
+            {/* 콘텐츠 */}
+            <h1 className="coming-soon">COMING SOON</h1>
+            <div className="frame-50811 mt-8">
+              <object
+                type="image/svg+xml"
+                data="/Frame 50811.svg"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  position: "relative",
+                }}
+              ></object>
+            </div>
+            <p className="pre-register-and-get-exclusive-reward mt-8">
+              PRE-REGISTER AND
+              <br />
+              GET EXCLUSIVE REWARD
+            </p>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleRegister();
+              }}
+            >
+              <div className="input-container">
+                <label htmlFor="email" className="sr-only">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                  className="input-field"
+                  required
+                />
+                {message && <p className="message">{message}</p>}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="register-button"
+                >
+                  {loading ? "Submitting..." : "Register"}
+                </button>
+              </div>
+            </form>
+          </div>
         </>
       )}
     </>
