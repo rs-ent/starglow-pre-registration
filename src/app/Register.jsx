@@ -83,14 +83,11 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
         src="https://telegram.org/js/telegram-web-app.js"
         strategy="lazyOnload"
         onLoad={() => {
-          const urlParams = new URLSearchParams(window.location.search);
-          const referrerValue = urlParams.get("startapp");
-          setReferrer(referrerValue);
-          console.log("Referrer: ", referrerValue);
-
           if (window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready();
+            const referrerValue = tg.initDataUnsafe?.start_param || null;
+            setReferrer(referrerValue);
             setUser(tg.initDataUnsafe?.user);
             console.log("User: ", tg.initDataUnsafe.user);
           } else {
