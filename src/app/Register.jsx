@@ -86,11 +86,13 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
           const urlParams = new URLSearchParams(window.location.search);
           const referrerValue = urlParams.get("startapp");
           setReferrer(referrerValue);
+          console.log("Referrer: ", referrerValue);
 
           if (window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready();
             setUser(tg.initDataUnsafe?.user);
+            console.log("User: ", tg.initDataUnsafe.user);
           } else {
             console.error("Couldn't find Telegram.WebApp");
           }
