@@ -4,7 +4,7 @@ const Loading = () => {
     
     return (
         <div className="items-center">
-            <div className="loading-section items-center w-1/3">
+            <div className="loading-section relative mx-auto items-center w-1/3">
                 <object
                     type="image/svg+xml"
                     data="/Frame 143.svg"

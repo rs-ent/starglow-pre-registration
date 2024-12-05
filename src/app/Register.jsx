@@ -166,7 +166,7 @@ Follow us for the latest news and let the glow shine brighter!
             <div
               style={{
                 position: "fixed",
-                width: "20%",
+                width: "25%",
                 height: "auto",
                 top: 16,
                 left: 16,
