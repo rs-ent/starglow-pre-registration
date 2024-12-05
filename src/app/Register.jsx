@@ -155,8 +155,7 @@ Follow us for the latest news and let the glow shine brighter!
             <div
               style={{
                 position: "fixed",
-                width: "100%",
-                maxWidth: "350px",
+                width: "20%",
                 height: "auto",
                 top: 16,
                 left: 16,

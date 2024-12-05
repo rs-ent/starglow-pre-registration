@@ -48,8 +48,7 @@ const ThankYou = ({registrationData}) => {
     <div className="thankyou-container">
       <div style={{
         position: "fixed", // fixed로 변경하여 화면 상단에 고정
-        width: "100%",
-        maxWidth: "350px",
+        width: "20%",
         height: "auto",
         top: 16,
         left: 16,
