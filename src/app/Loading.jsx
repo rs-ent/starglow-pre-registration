@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Loading = () => {
-
+const Loading = ({isInitialLoading}) => {
     return (
-        <div className="flex justify-center items-center text-center min-h-screen">
-            <div className="frame-2641">
+        <div className="loading-overlay">
+            <div className="loading-section">
                 <object
                     type="image/svg+xml"
                     data="/Frame 143.svg"
                     aria-label="Header SVG"
+                    className="w-3/5 h-auto"
                 />
             </div>
         </div>

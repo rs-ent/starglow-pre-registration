@@ -65,9 +65,7 @@
     grid-template-columns: repeat(3, 1fr);
     margin-top: 40px;
     gap: 20px;
-    width: 38%;
-    min-width: 85px;
-    max-width: 120px;
+    width: 35%;
     justify-content: center;
   }
 

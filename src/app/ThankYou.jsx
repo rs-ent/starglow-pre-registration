@@ -112,7 +112,8 @@ const ThankYou = ({registrationData}) => {
             style={{
               width: "100%",
               height: "auto",
-              display: "block",
+              position: "relative",
+              alignItems: "center",
             }}
           />
         </a>
