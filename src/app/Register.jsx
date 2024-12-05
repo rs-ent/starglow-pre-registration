@@ -101,7 +101,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
 
 Follow us for the latest news and let the glow shine brighter!
 
-🔗 INVITE LINK : ${link}
+🔗 INVITE LINK : ${link.replace(/_/g, "\\_")}
 `
           );
           console.log("Message sent to user.");
