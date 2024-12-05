@@ -95,29 +95,33 @@
   }
 
 /* Popup Overlay */
+/* Popup Overlay - 화면 전체 덮기 */
 .popup-overlay {
   position: fixed;
-  bottom: 0; /* 하단에 고정 */
+  top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3); /* 반투명 배경 */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35); /* 반투명한 검은 배경 */
+  backdrop-filter: blur(5px); /* 블러 효과 */
   display: flex;
-  justify-content: center;
-  align-items: flex-end; /* 하단에서 나타나도록 설정 */
-  z-index: 1000;
-  animation: fadeIn 0.3s ease; /* 팝업이 점점 나타나는 애니메이션 */
+  justify-content: center; /* 가로 정렬 (중앙 고정) */
+  align-items: flex-end; /* 세로 정렬 (하단 고정) */
+  z-index: 1000; /* 다른 요소 위에 표시 */
+  animation: fadeIn 0.3s ease; /* 배경이 점점 나타나는 애니메이션 */
 }
 
-/* Popup Content */
+/* Popup Content - 하단에서 올라오기 */
 .popup-content {
   background: linear-gradient(90deg, #5255d1 0%, #754bcc 100%);
   width: 100%;
-  max-width: 400px;
   border-radius: 15px 15px 0 0; /* 상단 모서리를 둥글게 */
   box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
-  animation: slideUp 0.3s ease; /* 슬라이드 업 애니메이션 */
+  transform: translateY(100%); /* 초기 위치: 화면 아래 */
+  animation: slideUp 0.3s ease; /* 하단에서 올라오는 애니메이션 */
+  z-index: 1010; /* 오버레이 위에 표시 */
 }
 
 /* 팝업 버튼 스타일 */

@@ -117,21 +117,15 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
 
       {/* 팝업 */}
       {isPopupOpen && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <h3>Share the GLOW with Your Friends!</h3>
-            <p>How would you like to share your invite link?</p>
-            <button onClick={handleShareInvite} className="popup-button">
-              Send Message
-            </button>
-            <button onClick={handleCopyInviteLink} className="popup-button">
-              Copy Invite Link
-            </button>
-            <button onClick={togglePopup} className="popup-close-button">
-              Close
-            </button>
-          </div>
+        <div class="popup-overlay">
+        <div class="popup-content">
+          <h3>Share Your Invite</h3>
+          <p>Choose how you want to share your invite link:</p>
+          <button class="popup-button" onclick={handleShareInvite}>Send Message</button>
+          <button class="popup-button" onclick={handleCopyInviteLink}>Copy Invite Link</button>
+          <button class="popup-close-button" onclick={togglePopup}>X</button>
         </div>
+      </div>
       )}
     </div>
   );
