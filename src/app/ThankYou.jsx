@@ -19,7 +19,7 @@ const ThankYou = ({registrationData}) => {
   };
 
   const handleCopyInviteLink = () => {
-    if (!registrationData.user?.id) {
+    if (!registrationData.telegramUser?.id) {
       alert("User Data is not provided");
       return;
     }
@@ -119,7 +119,7 @@ const ThankYou = ({registrationData}) => {
       </div>
 
       {/* 초대 링크 공유 버튼 */}
-      {registrationData.user?.id && (
+      {registrationData.telegramUser?.id && (
         <button
           onClick={openPopup}
           className="invite-button"

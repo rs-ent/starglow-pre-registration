@@ -195,15 +195,15 @@ Follow us for the latest news and let the glow shine brighter!
               className="input-field"
               required
             />
+            {message && <p className="message">{message}</p>}
+            <button
+              type="submit"
+              disabled={loading}
+              className="register-button"
+            >
+              {loading ? "Submitting..." : "Register"}
+            </button>
           </div>
-          {message && <p className="message">{message}</p>}
-          <button
-            type="submit"
-            disabled={loading}
-            className="register-button"
-          >
-            {loading ? "Submitting..." : "Register"}
-          </button>
         </form>
       </div>
     </>
