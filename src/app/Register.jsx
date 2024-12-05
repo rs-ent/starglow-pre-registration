@@ -86,8 +86,13 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
           if (window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready();
+
+            // startapp={referrerValue}
             const referrerValue = tg.initDataUnsafe?.start_param || null;
             setReferrer(referrerValue);
+            console.log(referrerValue);
+
+            // User Data
             setUser(tg.initDataUnsafe?.user);
             console.log("User: ", tg.initDataUnsafe.user);
           } else {
