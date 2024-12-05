@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import "./ThankYou.css";
 
 const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
