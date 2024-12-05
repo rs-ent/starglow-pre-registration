@@ -1,18 +1,18 @@
 import React from 'react';
 
-const Loading = ({hidden}) => {
+const Loading = () => {
     
     return (
-        <>
-            <div className="loading-section">
+        <div className="items-center">
+            <div className="loading-section items-center w-1/3">
                 <object
                     type="image/svg+xml"
                     data="/Frame 143.svg"
                     aria-label="Header SVG"
-                    className="w-1/2 h-auto"
+                    className="w-full"
                 />
             </div>
-        </>        
+        </div>        
     );
 };
 

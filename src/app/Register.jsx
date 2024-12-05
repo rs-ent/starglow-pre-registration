@@ -99,6 +99,7 @@ const Register = () => {
   
       if (user?.id) {
         try {
+          const photoUrl = 'https://firebasestorage.googleapis.com/v0/b/redslippers.appspot.com/o/uploads%2F5d398c1a-d2b0-40c7-ac1b-4f94fe08134d_2024-12-05%2019.10.08.jpg?alt=media&token=548ade94-b518-43ce-ab8b-a7cb9407f182';
           await sendMessageToUser(
             user.id,
             `🌟 Welcome to **Starglow Protocol**! 🌟
@@ -113,7 +114,7 @@ Follow us for the latest news and let the glow shine brighter!
 
 🔗 INVITE LINK : ${link.replace(/_/g, "\\_")}
 `
-          );
+          , photoUrl);
           console.log("Message sent to user.");
         } catch (error) {
           console.error("Error sending message to user:", error);
