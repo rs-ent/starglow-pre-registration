@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { sendMessageToUser } from "./utils/sendMessage";
 import { saveData } from "./firebase/fetch";
+import Script from 'next/script';
 import ThankYou from "./ThankYou";
 import './Register.css';
 
@@ -14,29 +15,7 @@ const Register = ({inviteCode}) => {
   const [referrer, setReferrer] = useState(null);
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
 
-  useEffect(() => {
-    const fetchReferrer = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const referrerValue = urlParams.get("startapp");
-      console.log('Referrer:', referrerValue);
-      setReferrer(referrerValue);
-    };
-  
-    fetchReferrer();
-  
-    if (window.Telegram?.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();
-      console.log('Telegram Web App:', tg);
-      setUser(tg.initDataUnsafe?.user);
-    } else {
-      console.log("Couldn't find Telegram.WebApp");
-      console.log("window : ", window);
-      console.log("window.Telegram : " , window.Telegram);
-      console.log("window.TelegramUser : ", window.telegramUser);
-    }
-  }, []);
-
+  // Registration handler
   const handleRegister = async () => {
     if (!email) {
       setMessage("Please enter your email.");
@@ -91,71 +70,89 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
     } finally {
       setLoading(false); // End loading state
     }
-  };
-
-  
+  }  
 
   return isRegistered ? (
     <div className="frame-2641">
       <ThankYou user={user} inviteCode={inviteCode} referrer={referrer}/>
     </div>
   ) : (
-    <div className="frame-2641">
-      <div style={{
-        position: "fixed", // fixed로 변경하여 화면 상단에 고정
-        width: "100%",
-        maxWidth: "350px",
-        height: "auto",
-        top: 16,
-        left: 16,
-        zIndex: 1000, // 다른 요소 위에 표시되도록 z-index 설정
-      }}>
-        <object
-          type="image/svg+xml"
-          data="/Frame 143.svg"
-          style={{
-            width: "80%",
-            height: "auto",
-            position: "absolute",
-            top: 0,
-            left: 0,
-          }}
-        ></object>
+    <>
+      {/* Telegram Web App SDK 로드 */}
+      <Script
+        src="https://telegram.org/js/telegram-web-app.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const referrerValue = urlParams.get("startapp");
+          setReferrer(referrerValue);
+
+          if (window.Telegram?.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            setUser(tg.initDataUnsafe?.user);
+          } else {
+            console.error("Couldn't find Telegram.WebApp");
+          }
+        }}
+      />
+      <div className="frame-2641">
+        <div style={{
+          position: "fixed", // fixed로 변경하여 화면 상단에 고정
+          width: "100%",
+          maxWidth: "350px",
+          height: "auto",
+          top: 16,
+          left: 16,
+          zIndex: 1000, // 다른 요소 위에 표시되도록 z-index 설정
+        }}>
+          <object
+            type="image/svg+xml"
+            data="/Frame 143.svg"
+            style={{
+              width: "80%",
+              height: "auto",
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          ></object>
+        </div>
+        <h1 className="coming-soon">COMING SOON</h1>
+        <div className="frame-50811 mt-8">
+          <object
+            type="image/svg+xml"
+            data="/Frame 50811.svg"
+            style={{
+              width: "100%",
+              height: "auto",
+              position: "relative",
+            }}
+          ></object>
+        </div>
+        <p className="pre-register-and-get-exclusive-reward mt-8">
+          PRE-REGISTER AND
+          <br />GET EXCLUSIVE REWARD
+        </p>
+        <div className="input-container">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className="input-field"
+          />
+        </div>
+        {message && <p className="message">{message}</p>}
+        <button
+          onClick={handleRegister}
+          disabled={loading}
+          className="register-button"
+        >
+          {loading ? "Submitting..." : "Register"}
+        </button>
       </div>
-      <h1 className="coming-soon">COMING SOON</h1>
-      <div className="frame-50811 mt-8">
-        <object
-          type="image/svg+xml"
-          data="/Frame 50811.svg"
-          style={{
-            width: "100%",
-            height: "auto",
-            position: "relative",
-          }}
-        ></object>
-      </div>
-      <p className="pre-register-and-get-exclusive-reward mt-8">
-        PRE-REGISTER AND
-        <br />GET EXCLUSIVE REWARD
-      </p>
-      <div className="input-container">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          className="input-field"
-        />
-      </div>
-      {message && <p className="message">{message}</p>}
-      <button
-        onClick={handleRegister}
-        disabled={loading}
-        className="register-button"
-      >
-        {loading ? "Submitting..." : "Register"}
-      </button>
-    </div>
+    </>
   );
 };
 
