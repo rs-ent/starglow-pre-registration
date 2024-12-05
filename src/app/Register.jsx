@@ -59,7 +59,7 @@ const Register = () => {
     // 2초 후 로딩 화면 숨김
     const timer = setTimeout(() => {
       setIsHidden(true);
-    }, 1000); // 애니메이션 시간과 동일하게 설정
+    }, 2000); // 애니메이션 시간과 동일하게 설정
 
     return () => clearTimeout(timer);
   }, [isInitialLoading]);
@@ -135,8 +135,8 @@ Follow us for the latest news and let the glow shine brighter!
   return (
     <>
       {/* Loading 화면 */}
-      <div className="loading-overlay">
-        <Loading />
+      <div className={`loading-overlay ${isHidden ? "hidden" : ""}`}>
+        <Loading isInitialLoading={isInitialLoading} />
       </div>
   
       {/* 조건부 렌더링 */}
