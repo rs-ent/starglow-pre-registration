@@ -111,7 +111,7 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
           className="invite-button"
           style={{ marginTop: "20px" }}
         >
-          INVITE
+          INVITE YOUR FRIENDS!
         </button>
       )}
 
@@ -119,7 +119,7 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
       {isPopupOpen && (
         <div className="popup-overlay">
           <div className="popup-content">
-            <h3>Invite Your Co-Pioneers!</h3>
+            <h3>Share the GLOW with Your Friends!</h3>
             <p>How would you like to share your invite link?</p>
             <button onClick={handleShareInvite} className="popup-button">
               Send Message
