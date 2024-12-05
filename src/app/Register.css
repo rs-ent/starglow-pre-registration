@@ -125,6 +125,10 @@
     animation: fadeToGradient 2s ease-in-out forwards;
   }
   
+  .loading-overlay.hidden {
+    pointer-events: none; /* 클릭 차단 해제 */
+    visibility: hidden; /* 요소를 화면에서 숨김 */
+  }
 
 
   @keyframes fadeToGradient {

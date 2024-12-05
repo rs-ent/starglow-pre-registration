@@ -20,6 +20,7 @@ const Register = () => {
   const [referrer, setReferrer] = useState(null);
   const [registeredData, setRegisteredData] = useState(null);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     const initializeTelegram = async () => {
@@ -53,6 +54,15 @@ const Register = () => {
   
     initializeTelegram();
   }, [tg]);
+
+  useEffect(() => {
+    // 2초 후 로딩 화면 숨김
+    const timer = setTimeout(() => {
+      setIsHidden(true);
+    }, 1000); // 애니메이션 시간과 동일하게 설정
+
+    return () => clearTimeout(timer);
+  }, [isInitialLoading]);
   
   const generateInviteLink = (inviteCode) => {
     return `https://t.me/${BOT_USERNAME}/${APP_NAME}?startapp=${inviteCode}`;
@@ -126,7 +136,7 @@ Follow us for the latest news and let the glow shine brighter!
     <>
       {/* Loading 화면 */}
       <div className="loading-overlay">
-        <Loading isInitialLoading={isInitialLoading} />
+        <Loading />
       </div>
   
       {/* 조건부 렌더링 */}

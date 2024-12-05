@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Loading = ({isInitialLoading}) => {
+const Loading = () => {
+    
     return (
         <>
             <div className="loading-section">
@@ -8,7 +9,7 @@ const Loading = ({isInitialLoading}) => {
                     type="image/svg+xml"
                     data="/Frame 143.svg"
                     aria-label="Header SVG"
-                    className="w-full h-auto"
+                    className="w-1/2 h-auto"
                 />
             </div>
         </>        
