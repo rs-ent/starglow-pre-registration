@@ -26,8 +26,12 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
     navigator.clipboard.writeText(inviteLink);
   };
 
-  const togglePopup = () => {
-    setIsPopupOpen(!isPopupOpen);
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+  
+  const closePopup = () => {
+    setIsPopupOpen(false);
   };
 
   return (
@@ -79,7 +83,7 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
         <p>AND STAY TUNED!<br/><br/>DON’T FORGET TO<br/>FOLLOW OUR CHANNEL</p>
       </div>
       <div className="social">
-        <a href="https://t.me/starglow_redslippers_bot" target="_blank" rel="noopener noreferrer">
+        <a href="https://t.me/StarglowP_Ann" target="_blank" rel="noopener noreferrer">
           <img
               src="/telegram.svg"
               alt="TELEGRAM SVG"
@@ -107,7 +111,7 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
       {/* 초대 링크 공유 버튼 */}
       {user?.id && (
         <button
-          onClick={togglePopup}
+          onClick={openPopup}
           className="invite-button"
           style={{ marginTop: "20px" }}
         >
@@ -117,15 +121,14 @@ const ThankYou = ({user, inviteCode, referrer, inviteLink}) => {
 
       {/* 팝업 */}
       {isPopupOpen && (
-        <div class="popup-overlay">
-        <div class="popup-content">
-          <h3>Share Your Invite</h3>
-          <p>Choose how you want to share your invite link:</p>
-          <button class="popup-button" onclick={handleShareInvite}>Send Message</button>
-          <button class="popup-button" onclick={handleCopyInviteLink}>Copy Invite Link</button>
-          <button class="popup-close-button" onclick={togglePopup}>X</button>
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Share Your Invite</h3>
+            <p>Choose how you want to share your invite link:</p>
+            <button className="popup-button" onClick={handleShareInvite}>Send Message</button>
+            <button className="popup-button" onClick={handleCopyInviteLink}>Copy Invite Link</button>
+          </div>
         </div>
-      </div>
       )}
     </div>
   );

@@ -2,15 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import { sendMessageToUser } from "./utils/sendMessage";
-import { saveData } from "./firebase/fetch";
+import { saveData, createUniqueInviteCode, isUniqueUser } from "./firebase/fetch";
 import Script from 'next/script';
 import ThankYou from "./ThankYou";
+import Loading from "./Loading";
 import './Register.css';
 
 const BOT_USERNAME = "starglow_redslippers_bot";
 const APP_NAME = "SGTPre";
 
-const Register = ({inviteCode}) => {
+const Register = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(""); // Manage email input
   const [message, setMessage] = useState(""); // Feedback message
@@ -18,8 +19,9 @@ const Register = ({inviteCode}) => {
   const [referrer, setReferrer] = useState(null);
   const [inviteLink, setInviteLink] = useState("");
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
-
-  const generateInviteLink = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const generateInviteLink = (inviteCode) => {
     return `https://t.me/${BOT_USERNAME}/${APP_NAME}?startapp=${inviteCode}`;
   }; 
 
@@ -38,7 +40,8 @@ const Register = ({inviteCode}) => {
   
     try {
       setLoading(true);
-      const link = generateInviteLink();
+      const inviteCode = await createUniqueInviteCode(email);
+      const link = generateInviteLink(inviteCode);
       setInviteLink(link);
       const registrationData = {
         email,
@@ -66,7 +69,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
 
  Follow us for the latest news and let the glow shine brighter!
 
-🔗 INVITE LINK : ${inviteLink}
+🔗 INVITE LINK : ${link}
 `
           );
           console.log("Message sent to user.");
@@ -90,13 +93,13 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
     <div className="frame-2641">
       <ThankYou user={user} inviteCode={inviteCode} referrer={referrer} inviteLink={inviteLink}/>
     </div>
-  ) : (
+  ) : (isLoading ? (<Loading />) : (
     <>
       {/* Telegram Web App SDK 로드 */}
       <Script
         src="https://telegram.org/js/telegram-web-app.js"
         strategy="lazyOnload"
-        onLoad={() => {
+        onLoad={ async () => {
           if (window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready();
@@ -104,11 +107,14 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
             // startapp={referrerValue}
             const referrerValue = tg.initDataUnsafe?.start_param || null;
             setReferrer(referrerValue);
-            console.log(referrerValue);
 
             // User Data
             setUser(tg.initDataUnsafe?.user);
-            console.log("User: ", tg.initDataUnsafe.user);
+
+            const uniqueUser = await isUniqueUser(tg.initDataUnsafe?.user);
+            isRegistered(!uniqueUser);
+
+            setIsLoading(false);
           } else {
             console.error("Couldn't find Telegram.WebApp");
           }
@@ -171,6 +177,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
         </button>
       </div>
     </>
+  )
   );
 };
 
