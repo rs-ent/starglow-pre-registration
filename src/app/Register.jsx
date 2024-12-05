@@ -7,6 +7,7 @@ import Script from 'next/script';
 import ThankYou from "./ThankYou";
 import Loading from "./Loading";
 import './Register.css';
+import { unique } from "next/dist/build/utils";
 
 const BOT_USERNAME = "starglow_redslippers_bot";
 const APP_NAME = "SGTPre";
@@ -18,8 +19,6 @@ const Register = () => {
   const [message, setMessage] = useState(""); // Feedback message
   const [loading, setLoading] = useState(false); // Loading state
   const [referrer, setReferrer] = useState(null);
-  const [inviteCode, setInviteCode] = useState("");
-  const [inviteLink, setInviteLink] = useState("");
   const [registeredData, setRegisteredData] = useState(null);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
@@ -35,12 +34,15 @@ const Register = () => {
         tg.ready();
   
         const referrerValue = tg.initDataUnsafe?.start_param || null;
+        console.log("Referrer: ", referrerValue);
         setReferrer(referrerValue);
   
         const userData = tg.initDataUnsafe?.user;
+        console.log("User: ", userData);
         setUser(userData);
   
         const uniqueUser = await isUniqueUser(userData);
+        console.log("Registration Data: ", uniqueUser);
         setRegisteredData(uniqueUser);
   
       } catch (error) {

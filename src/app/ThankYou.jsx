@@ -119,7 +119,7 @@ const ThankYou = ({registrationData}) => {
       </div>
 
       {/* 초대 링크 공유 버튼 */}
-      {user?.id && (
+      {registrationData.user?.id && (
         <button
           onClick={openPopup}
           className="invite-button"
