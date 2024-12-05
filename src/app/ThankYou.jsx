@@ -118,7 +118,7 @@ const ThankYou = ({registrationData}) => {
         </a>
         <a href="https://medium.com/@starglowP/what-is-starglow-protocol-57537b348313" target="_blank" rel="noopener noreferrer">
           <img
-              src="/logo-medium.png"
+              src="/medium.png"
               alt="MEDIUM SVG"
               style={{
                 width: "100%",
