@@ -40,19 +40,19 @@ export async function sendMessage(chatId, text, photoUrl, options = {}) {
   }
 
   return responseBody;
-}
+};
 
 export const sendMessageToUser = async (chatId, message, photo) => {
-    const response = await fetch("/api/sendMessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chatId, message, photo }),
-    });
-  
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.details || "Failed to send message.");
-    }
-  
-    return await response.json();
+  const response = await fetch("/api/sendMessage", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chatId, message, photo }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.details || "Failed to send message.");
+  }
+
+  return await response.json();
 };
