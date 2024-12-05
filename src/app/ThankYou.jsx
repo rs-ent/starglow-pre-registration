@@ -3,12 +3,12 @@
 import React from "react";
 import "./ThankYou.css";
 
-export default function ThankYou({user}) {
+const ThankYou = ({user, inviteCode, referrer}) => {
 
   const BOT_USERNAME = "starglow_redslippers_bot";
 
-  const generateInviteLink = (referrerId) => {
-    return `https://t.me/${BOT_USERNAME}?start=${referrerId}`;
+  const generateInviteLink = (inviteCode) => {
+    return `https://t.me/${BOT_USERNAME}?referrer=${inviteCode}`;
   };
 
   const handleCopyInviteLink = () => {
@@ -16,7 +16,7 @@ export default function ThankYou({user}) {
       alert("User ID is not available.");
       return;
     }
-    const link = generateInviteLink(user.id);
+    const link = generateInviteLink(inviteCode);
     navigator.clipboard.writeText(link);
     alert("Your Telegram invite link has been copied to clipboard!");
   };
@@ -108,3 +108,5 @@ export default function ThankYou({user}) {
     </div>
   );
 }
+
+export default ThankYou;

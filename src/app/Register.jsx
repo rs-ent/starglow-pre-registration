@@ -6,19 +6,27 @@ import { saveData } from "./firebase/fetch";
 import ThankYou from "./ThankYou";
 import './Register.css';
 
-export default function Register() {
+const Register = ({inviteCode}) => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(""); // Manage email input
   const [message, setMessage] = useState(""); // Feedback message
   const [loading, setLoading] = useState(false); // Loading state
+  const [referrer, setReferrer] = useState(null);
   const [isRegistered, setIsRegistered] = useState(false); // State to show ThankYou page
 
   useEffect(() => {
     console.log('Telegram Web App:', window.Telegram?.WebApp);
     console.log('Window:', window);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrerParam = urlParams.get("start") || "none";
+    console.log('Referrer:', referrerParam);
+    setReferrer(referrerParam);
+    
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
+      console.log('Telegram Web App:', tg);
       console.log('Init Data:', tg.initData);
       console.log('Init Data Unsafe:', tg.initDataUnsafe);
       const userInfo = tg.initDataUnsafe?.user;
@@ -44,6 +52,8 @@ export default function Register() {
       const registrationData = {
         email,
         telegramUser: user,
+        inviteCode: inviteCode,
+        referrer: referrer,
         createdAt: new Date().toISOString(),
       };
   
@@ -85,7 +95,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
 
   return isRegistered ? (
     <div className="frame-2641">
-      <ThankYou user={user}/>
+      <ThankYou user={user} inviteCode={inviteCode} referrer={referrer}/>
     </div>
   ) : (
     <div className="frame-2641">
@@ -145,4 +155,6 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
       </button>
     </div>
   );
-}
+};
+
+export default Register;

@@ -17,33 +17,32 @@ export default async function handler(req, res) {
     const text = message.text;
 
     if (text.startsWith("/start")) {
-      const referrerId = text.split(" ")[1] || null; // 초대자 ID 추출
+      const parts = text.split(" ");
+      referrer = parts[1] || "none"; // Default to "none" if no referrer provided
+    }
 
-      console.log(`User ${chatId} was invited by ${referrerId}`);
+    console.log(`Referrer ID: ${referrer}`);
 
-      // 데이터베이스에 저장
-      await saveToDatabase(chatId, referrerId);
-
-      // 환영 메시지 전송
+    if(chatId) {
       try {
         await sendMessage(
           chatId,
-          `🌟 Welcome to Starglow Protocol! 🚀
+  `🌟 Welcome to Starglow Protocol! 🚀
           
-You were invited by ${referrerId || "an anonymous friend"}. 🙌
+  You were invited by ${referrerId || "an anonymous friend"}. 🙌
 
-🚀 *LET THEM GLOW!* 🚀
+  🚀 *LET THEM GLOW!* 🚀
 
-✨ Stay tuned for more updates from the Starglow Team!
+  ✨ Stay tuned for more updates from the Starglow Team!
 
-🔗 Follow us for the latest news and let the glow shine brighter!`
+  🔗 Follow us for the latest news and let the glow shine brighter!`
         );
-        console.log("Welcome message sent to user.");
+
+        return res.status(200).json({ status: "success" });
+
       } catch (error) {
         console.error("Error sending welcome message:", error);
       }
-
-      return res.status(200).json({ status: "success" });
     }
 
     return res.status(200).json({ status: "ignored" });

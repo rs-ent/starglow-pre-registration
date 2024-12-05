@@ -1,5 +1,5 @@
 import { db, storage } from './firebase';
-import { doc, collection, addDoc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, collection, addDoc, setDoc, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
 
 /**
  * Firestore에서 데이터를 저장하거나 업데이트합니다.
@@ -51,4 +51,29 @@ export async function saveData(collectionName, data, docId = null) {
         console.error('Error saving data:', error);
         throw error; // 오류 발생 시 호출한 함수로 다시 던짐
     }
+}
+
+export async function createUniqueInviteCode() {
+    function generateInviteCode() {
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let result = "";
+        for (let i = 0; i < 8; i++) {
+          result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+
+    const collectionRef = collection(db, "users"); // Firestore 컬렉션 참조
+    let isUnique = false;
+    let inviteCode = "";
+  
+    while (!isUnique) {
+      inviteCode = generateInviteCode(); // 새 초대 코드 생성
+      const q = query(collectionRef, where("StarglowPreRegistration", "==", inviteCode));
+      const querySnapshot = await getDocs(q);
+  
+      if (querySnapshot.empty) isUnique = true;
+    }
+  
+    return inviteCode;
 }
