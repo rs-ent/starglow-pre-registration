@@ -3,7 +3,7 @@ import React from 'react';
 const Loading = () => {
     
     return (
-        <div className="items-center">
+        <div className="flex items-center justify-center min-h-screen">
             <div className="loading-section relative mx-auto items-center w-1/3">
                 <object
                     type="image/svg+xml"

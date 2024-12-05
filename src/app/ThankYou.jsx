@@ -93,40 +93,13 @@ const ThankYou = ({registrationData}) => {
       </div>
       <div className="social">
         <a href="https://t.me/StarglowP_Ann" target="_blank" rel="noopener noreferrer">
-          <img
-              src="/telegram.svg"
-              alt="TELEGRAM SVG"
-              style={{
-                width: "100%",
-                height: "auto",
-                position: "relative",
-                alignItems: "center",
-              }}
-          />
+          <img src="/telegram.svg" alt="TELEGRAM SVG" />
         </a>
         <a href="https://x.com/starglowP" target="_blank" rel="noopener noreferrer">
-          <img
-            src="/x.svg"
-            alt="X SVG"
-            style={{
-              width: "100%",
-              height: "auto",
-              position: "relative",
-              alignItems: "center",
-            }}
-          />
+          <img src="/x.svg" alt="X SVG" />
         </a>
         <a href="https://medium.com/@starglowP/what-is-starglow-protocol-57537b348313" target="_blank" rel="noopener noreferrer">
-          <img
-              src="/logo-medium-old-round.svg"
-              alt="MEDIUM SVG"
-              style={{
-                width: "100%",
-                height: "auto",
-                position: "relative",
-                alignItems: "center",
-              }}
-          />
+          <img src="/logo-medium-old-round.svg" alt="MEDIUM SVG" />
         </a>
       </div>
 
