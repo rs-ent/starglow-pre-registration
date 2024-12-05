@@ -116,6 +116,18 @@ const ThankYou = ({registrationData}) => {
             }}
           />
         </a>
+        <a href="https://medium.com/@starglowP/what-is-starglow-protocol-57537b348313" target="_blank" rel="noopener noreferrer">
+          <img
+              src="/medium.svg"
+              alt="MEDIUM SVG"
+              style={{
+                width: "100%",
+                height: "auto",
+                position: "relative",
+                alignItems: "center",
+              }}
+          />
+        </a>
       </div>
 
       {/* 초대 링크 공유 버튼 */}

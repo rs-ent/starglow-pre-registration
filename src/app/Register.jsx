@@ -74,9 +74,7 @@ const Register = () => {
     try {
       setLoading(true);
       const inviteCode = await createUniqueInviteCode(email);
-      setInviteCode(inviteCode);
       const link = generateInviteLink(inviteCode);
-      setInviteLink(link);
       const registrationData = {
         email,
         telegramUser: user,
