@@ -75,7 +75,7 @@ const ThankYou = ({registrationData}) => {
           aria-label="Starglow Logo"
         ></object>
       </div>
-      <div className="frame-50811 mt-8">
+      <div className="frame-50811 mt-4">
           <object
             type="image/svg+xml"
             data="/Frame 50811.svg"
