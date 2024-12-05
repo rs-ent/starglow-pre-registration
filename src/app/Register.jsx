@@ -27,7 +27,7 @@ const Register = () => {
     const initializeTelegram = async () => {
       if (!tg) {
         console.error("Telegram WebApp is not initialized.");
-        setIsLoading(false);
+        setIsInitialLoading(false);
         return;
       }
   
@@ -46,7 +46,7 @@ const Register = () => {
       } catch (error) {
         console.error("Error initializing Telegram WebApp:", error);
       } finally {
-        setIsLoading(false);
+        setIsInitialLoading(false);
       }
     };
   
@@ -100,7 +100,7 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
 
 ✨ Stay tuned for more updates from the Starglow Team!
 
- Follow us for the latest news and let the glow shine brighter!
+Follow us for the latest news and let the glow shine brighter!
 
 🔗 INVITE LINK : ${link}
 `
@@ -138,6 +138,8 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
             setTG(tg);
           } else {
             console.error("Couldn't find Telegram.WebApp");
+            setMessage("Couldn't find Telegram.WebApp");
+            setIsInitialLoading(false);
           }
         }}
       />
@@ -179,25 +181,28 @@ Thank you for pre-registering, ${user?.first_name || "Pioneer"}! 🙌
           PRE-REGISTER AND
           <br />GET EXCLUSIVE REWARD
         </p>
-        <div className="input-container">
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            className="input-field"
-            required
-          />
-        </div>
-        {message && <p className="message">{message}</p>}
-        <button
-          onClick={handleRegister}
-          disabled={loading}
-          className="register-button"
-        >
-          {loading ? "Submitting..." : "Register"}
-        </button>
+        <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }}>
+          <div className="input-container">
+            <label htmlFor="email" className="sr-only">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="input-field"
+              required
+            />
+          </div>
+          {message && <p className="message">{message}</p>}
+          <button
+            type="submit"
+            disabled={loading}
+            className="register-button"
+          >
+            {loading ? "Submitting..." : "Register"}
+          </button>
+        </form>
       </div>
     </>
   )
