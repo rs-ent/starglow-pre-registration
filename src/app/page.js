@@ -1,10 +1,10 @@
-import Register from "./Register";
+import ThankYou from "./EventEnded";
 
 export default async function Home() {
     return (
         <div>
             <div className="content">
-            <Register />
+            <ThankYou />
             </div>
         </div>
     );

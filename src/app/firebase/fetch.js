@@ -15,7 +15,7 @@ import { doc, collection, addDoc, setDoc, serverTimestamp, query, where, getDoc,
  *
  * @example
  * // 조건에 맞는 단일 문서 가져오기
- * const result = await fetchDataWithQuery('artists', {
+ * const result = await fetchData('artists', {
  *   comparingField: 'genre',
  *   opStr: '==',
  *   targetValue: 'K-pop'
@@ -24,7 +24,7 @@ import { doc, collection, addDoc, setDoc, serverTimestamp, query, where, getDoc,
  *
  * @example
  * // 조건 없이 컬렉션의 모든 문서 가져오기
- * const allData = await fetchDataWithQuery('artists', null, true);
+ * const allData = await fetchData('artists', null, true);
  * console.log(allData);
  */
 export async function fetchData(
@@ -34,7 +34,8 @@ export async function fetchData(
   ) {
     try {
       // 문서 ID로 직접 조회
-      if (queryObj?.comp === 'docId' && queryObj.val) {
+      if (queryObj && queryObj?.comp === 'docId' && queryObj.val) {
+        console.log('Query : ', queryObj);
         const docId = queryObj.val;
         const docRef = doc(db, collectionName, docId);
         const docSnap = await getDoc(docRef);
@@ -74,8 +75,8 @@ export async function fetchData(
   
       // 다중/단일 결과 반환 처리
       return fetchMultiples
-        ? serializeFirestoreData(data) // 다중 문서 직렬화
-        : serializeFirestoreData(data[0]); // 첫 번째 문서만 직렬화
+        ? data // 다중 문서 직렬화
+        : data[0]; // 첫 번째 문서만 직렬화
     } catch (error) {
       console.error(
         `Error fetching data from collection '${collectionName}' ${
