@@ -94,7 +94,7 @@ const ThankYou = () => {
         {/* 메인 앱 링크 */}
         <button
             onClick={() => {
-                window.location.href = "https://t.me/starglow_redslippers_bot";
+                window.location.href = "http://starglow.pro/start";
             }}
             className="invite-button"
             style={{ marginTop: "20px" }}
