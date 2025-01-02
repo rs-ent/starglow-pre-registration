@@ -62,7 +62,7 @@
 
   .social {
     display: grid;    
-    grid-template-columns: repeat(3, 1fr); /* 3열 레이아웃 */
+    grid-template-columns: repeat(4, 1fr); /* 3열 레이아웃 */
     gap: 20px; /* 아이템 간격 */
     margin-top: 40px;
     width: 35%;

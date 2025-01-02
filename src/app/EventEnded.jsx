@@ -89,6 +89,18 @@ const ThankYou = () => {
               }}
           />
         </a>
+        <a href="https://starglow-protocol.vercel.app" target="_blank" rel="noopener noreferrer">
+          <img
+              src="/globe2.png"
+              alt="GLOBE SVG"
+              style={{
+                width: "100%",
+                height: "auto",
+                position: "relative",
+                alignItems: "center",
+              }}
+          />
+        </a>
         </div>
 
         {/* 메인 앱 링크 */}
