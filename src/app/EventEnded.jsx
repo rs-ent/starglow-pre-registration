@@ -50,7 +50,7 @@ const ThankYou = () => {
       <div className="thankyou-message">
         
         <h1>THANK YOU!</h1>
-        <p>AND STAY TUNED!<br/><br/>DON’T FORGET TO<br/>FOLLOW OUR CHANNEL</p>
+        <p>NOW DAILY FRESH SONG<br/>IS DELIVERED!<br/><br/>DON’T FORGET TO<br/>FOLLOW OUR CHANNEL</p>
       </div>
       <div className="social">
         <a href="https://t.me/StarglowP_Ann" target="_blank" rel="noopener noreferrer">
