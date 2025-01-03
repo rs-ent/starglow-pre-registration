@@ -91,7 +91,7 @@ const ThankYou = () => {
         </a>
         <a href="https://starglow-protocol.vercel.app" target="_blank" rel="noopener noreferrer">
           <img
-              src="/globe2.png"
+              src="/globe.png"
               alt="GLOBE SVG"
               style={{
                 width: "100%",
